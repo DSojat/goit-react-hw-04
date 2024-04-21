@@ -1,0 +1,37 @@
+/* ========= Gallery ========== */
+
+.galleryList {
+  display: flex;
+  padding: 18px 0;
+  justify-content: center;
+  gap: 12px;
+  background: #fff;
+  flex-wrap: wrap;
+}
+
+.galleryItem {
+  list-style: none;
+  border: 1px solid #808080;
+}
+
+/* .gallery-stats {
+  display: flex;
+  justify-content: space-around;
+  padding: 4px;
+}
+
+.gallery-stats ul {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: #2e2f42;
+}
+
+.gallery-stats li {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-align: center;
+} */

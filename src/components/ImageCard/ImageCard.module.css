@@ -1,0 +1,15 @@
+.imgBox {
+  overflow: hidden;
+}
+
+.img {
+  position: relative;
+  width: 280px;
+  height: 180px;
+  object-fit: cover;
+  transition: transform 250ms ease-in-out;
+}
+
+.img:hover {
+  transform: scale(1.05);
+}
