@@ -1,0 +1,41 @@
+.header {
+  padding: 8px 0;
+  background-color: rgba(0, 0, 255, 0.699);
+}
+
+.form {
+  position: relative;
+  width: min-content;
+  margin: 0 auto;
+}
+
+.input {
+  font-family: inherit;
+  font-size: inherit;
+  align-self: center;
+  padding-left: 34px;
+  height: 30px;
+}
+
+.button {
+  position: absolute;
+  left: 6px;
+  top: 5px;
+  font-family: inherit;
+  font-size: inherit;
+  align-self: center;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: all 250ms ease-out;
+}
+
+.button:hover {
+  opacity: 60%;
+  /* transform: rotate(90deg); */
+}
+
+.button:active {
+  transform: rotate(90deg) scale(1.3);
+}
