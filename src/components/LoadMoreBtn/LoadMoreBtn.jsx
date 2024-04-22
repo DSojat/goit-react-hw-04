@@ -7,5 +7,4 @@ const LoadMoreBtn = ({ onClick }) => {
     </button>
   );
 };
-
 export default LoadMoreBtn;

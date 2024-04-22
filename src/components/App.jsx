@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import SearchBar from './SearchBar/SearchBar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Loader from './Loader/Loader';
@@ -16,10 +16,24 @@ function App() {
   const [loadMore, setLoadMore] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const galleryRef = useRef();
 
   useEffect(() => {
     page > totalPages ? setLoadMore(false) : setLoadMore(true);
   }, [totalPages]);
+
+  function scrollGallery() {
+    const elem = galleryRef.current;
+    console.log(elem);
+    const { height } = elem.getBoundingClientRect();
+    console.log(height);
+    window.scrollBy({
+      top: window.innerHeight,
+      // top: height * 20,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }
 
   const handleSearch = async topic => {
     try {
@@ -41,10 +55,11 @@ function App() {
   const handleLoadMore = async () => {
     setPage(page + 1);
     const data = await getGallerySearch(topicValue, page);
-    setImages(data.hits);
+    setImages([...images, ...data.hits]);
     if (page >= totalPages) {
       setLoadMore(false);
     }
+    scrollGallery();
   };
 
   return (
@@ -55,6 +70,11 @@ function App() {
         {error && <ErrorMessage></ErrorMessage>}
         {images.length > 0 && <ImageGallery items={images} />}
         {loadMore && <LoadMoreBtn onClick={handleLoadMore}></LoadMoreBtn>}
+        return{' '}
+        <button onClick={() => window.scrollBy(0, window.innerHeight)}>
+          Button with ref
+        </button>
+        ;
       </section>
     </>
   );
