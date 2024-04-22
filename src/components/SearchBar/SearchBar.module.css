@@ -14,7 +14,14 @@
   font-size: inherit;
   align-self: center;
   padding-left: 34px;
+  width: 400px;
   height: 30px;
+}
+
+input:focus {
+  outline: solid 1px;
+  outline-offset: -3px;
+  outline-color: rgba(0, 0, 255, 0.699);
 }
 
 .button {
@@ -33,7 +40,6 @@
 
 .button:hover {
   opacity: 60%;
-  /* transform: rotate(90deg); */
 }
 
 .button:active {
