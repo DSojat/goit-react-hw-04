@@ -4,8 +4,8 @@ import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
 const ImageModal = ({ modalIsOpen, setIsOpen, item }) => {
-  const src = item.webformatURL;
-  const alt = item.tags;
+  const src = item[0];
+  const alt = item[1];
 
   const customStyles = {
     overlay: {

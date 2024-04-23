@@ -19,6 +19,7 @@ function App() {
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [imageItem, setImageValue] = useState([]);
 
   useEffect(() => {
     if (images.length > 0) {
@@ -30,7 +31,6 @@ function App() {
         top: window.innerHeight / 1.5,
         behavior: 'smooth',
       });
-      setIsOpen(true);
     }
   }, [images]);
 
@@ -64,11 +64,19 @@ function App() {
     }
   };
 
+  const handleImageView = evt => {
+    evt.preventDefault();
+    setImageValue([evt.target.src, evt.target.alt]);
+    setIsOpen(true);
+  };
+
   return (
     <>
       <SearchBar onSubmit={handleSearch}></SearchBar>
       <section className="gallerySection">
-        {images.length > 0 && <ImageGallery items={images} />}
+        {images.length > 0 && (
+          <ImageGallery items={images} handleClick={handleImageView} />
+        )}
         {loading && <Loader></Loader>}
         {error && <ErrorMessage></ErrorMessage>}
         {loadMore > loading && (
@@ -82,7 +90,7 @@ function App() {
           <ImageModal
             modalIsOpen={modalIsOpen}
             setIsOpen={setIsOpen}
-            item={images[0]}
+            item={imageItem}
           ></ImageModal>
         )}
       </section>
