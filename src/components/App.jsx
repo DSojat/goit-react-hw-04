@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import Modal from 'react-modal';
 
 import SearchBar from './SearchBar/SearchBar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Loader from './Loader/Loader';
 import ErrorMessage from './ErrorMessage/ErrorMessage';
 import LoadMoreBtn from './LoadMoreBtn/LoadMoreBtn';
+import ImageModal from './ImageModal/ImageModal';
 
 import getGallerySearch from '../pixabay-api';
 import { limitPage } from '../pixabay-api';
@@ -18,6 +18,7 @@ function App() {
   const [loadMore, setLoadMore] = useState(false);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (images.length > 0) {
@@ -29,6 +30,7 @@ function App() {
         top: window.innerHeight / 1.5,
         behavior: 'smooth',
       });
+      setIsOpen(true);
     }
   }, [images]);
 
@@ -75,6 +77,13 @@ function App() {
               {page} of {totalPages}
             </span>
           </LoadMoreBtn>
+        )}
+        {modalIsOpen && (
+          <ImageModal
+            modalIsOpen={modalIsOpen}
+            setIsOpen={setIsOpen}
+            item={images[0]}
+          ></ImageModal>
         )}
       </section>
     </>
