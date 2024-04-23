@@ -1,6 +1,13 @@
 .header {
-  padding: 8px 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 90px;
   background-color: rgba(0, 0, 255, 0.699);
+}
+
+.title {
+  color: #fafafa;
+  text-transform: capitalize;
 }
 
 .form {

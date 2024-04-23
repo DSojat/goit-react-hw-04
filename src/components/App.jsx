@@ -7,8 +7,8 @@ import ErrorMessage from './ErrorMessage/ErrorMessage';
 import LoadMoreBtn from './LoadMoreBtn/LoadMoreBtn';
 import ImageModal from './ImageModal/ImageModal';
 
-import getGallerySearch from '../pixabay-api';
-import { limitPage } from '../pixabay-api';
+import getGallerySearch from '../unsplash-api';
+import { limitPage } from '../unsplash-api';
 
 function App() {
   const [images, setImages] = useState([]);
@@ -42,8 +42,8 @@ function App() {
       setPage(1);
       const startPage = 1;
       const data = await getGallerySearch(topic, startPage);
-      setTotalPages(Math.ceil(data.totalHits / limitPage));
-      setImages(data.hits);
+      setTotalPages(Math.ceil(data.total_pages / limitPage));
+      setImages(data.results);
     } catch (error) {
       setError(true);
     } finally {
@@ -56,7 +56,7 @@ function App() {
       setLoading(true);
       setPage(page + 1);
       const data = await getGallerySearch(topicValue, page + 1);
-      setImages([...images, ...data.hits]);
+      setImages([...images, ...data.results]);
     } catch (error) {
       setError(true);
     } finally {
@@ -66,7 +66,9 @@ function App() {
 
   const handleImageView = evt => {
     evt.preventDefault();
-    setImageValue([evt.target.src, evt.target.alt]);
+    const strValue = evt.target.attributes.value.value;
+    const array1 = strValue.split(',@');
+    setImageValue([...array1, evt.target.alt]);
     setIsOpen(true);
   };
 

@@ -5,19 +5,22 @@ Modal.setAppElement('#root');
 
 const ImageModal = ({ modalIsOpen, setIsOpen, item }) => {
   const src = item[0];
-  const alt = item[1];
+  const description = item[1];
+  const alt = item[2];
 
   const customStyles = {
     overlay: {
       backgroundColor: 'rgba(46, 47, 66, 0.4)',
     },
     content: {
+      width: '1024px',
       top: '50%',
       left: '50%',
       right: 'auto',
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
+      color: '#fafafa',
       backgroundColor: 'rgba(46, 47, 66, 1)',
     },
   };
@@ -51,6 +54,7 @@ const ImageModal = ({ modalIsOpen, setIsOpen, item }) => {
         <h3 ref={_subtitle => (subtitle = _subtitle)}>{alt}</h3>
         <div>
           <img src={src} alt={alt} />
+          {description != 'null' && <p>{description}</p>}
         </div>
       </Modal>
     </div>

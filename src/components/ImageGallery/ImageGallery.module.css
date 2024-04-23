@@ -14,13 +14,13 @@
   border: 1px solid #808080;
 }
 
-/* .gallery-stats {
+.galleryStats {
   display: flex;
   justify-content: space-around;
   padding: 4px;
 }
 
-.gallery-stats ul {
+.galleryStatsUl {
   font-size: 12px;
   font-weight: 600;
   line-height: 16px;
@@ -29,9 +29,9 @@
   color: #2e2f42;
 }
 
-.gallery-stats li {
+.galleryStatsLi {
   font-size: 12px;
   font-weight: 400;
   letter-spacing: 0.04em;
   text-align: center;
-} */
+}

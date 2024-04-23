@@ -18,6 +18,7 @@ const SearchBar = ({ onSubmit }) => {
 
   return (
     <header className={css.header}>
+      <h2 className={css.title}>Search machine</h2>
       <form className={css.form} onSubmit={handleSubmit}>
         <input
           className={css.input}
@@ -30,13 +31,19 @@ const SearchBar = ({ onSubmit }) => {
         <button className={css.button} type="submit">
           &#128269;
         </button>
-        <Toaster toastOptions={{ duration: 2000 }}>
+        <Toaster
+          toastOptions={{ duration: 2000 }}
+          containerStyle={{
+            top: 100,
+          }}
+        >
           {t => (
             <div
               style={{
                 opacity: t.visible ? 1 : 0,
                 background: 'white',
                 padding: 8,
+                color: 'blue',
               }}
             >
               {resolveValue(t.message, t)}
@@ -44,6 +51,7 @@ const SearchBar = ({ onSubmit }) => {
           )}
         </Toaster>
       </form>
+      <h2 className={css.title}>Search machine</h2>
     </header>
   );
 };
