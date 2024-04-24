@@ -5,7 +5,7 @@ const SearchBar = ({ onSubmit }) => {
   const handleSubmit = evt => {
     evt.preventDefault();
     const form = evt.target;
-    const topic = form.elements.topic.value.trim();
+    const topic = form.elements.topic.value.trim().toLowerCase();
 
     if (topic === '') {
       toast.error('Please enter search term!');

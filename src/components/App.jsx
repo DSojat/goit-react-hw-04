@@ -25,43 +25,53 @@ function App() {
     if (images.length > 0) {
       page >= totalPages ? setLoadMore(false) : setLoadMore(true);
     }
-
     if (page > 1) {
       window.scrollBy({
         top: window.innerHeight / 1.5,
         behavior: 'smooth',
       });
+    } else {
+      topicValue && setPage(1);
     }
   }, [images]);
 
-  const handleSearch = async topic => {
-    try {
-      setLoading(true);
-      setTopic(topic);
-      setImages([]);
-      setPage(1);
-      const startPage = 1;
-      const data = await getGallerySearch(topic, startPage);
-      setTotalPages(Math.ceil(data.total_pages / limitPage));
-      setImages(data.results);
-    } catch (error) {
-      setError(true);
-    } finally {
-      setLoading(false);
+  useEffect(() => {
+    if (page > 0) {
+      const fetchData = async () => {
+        try {
+          setLoading(true);
+          const data = await getGallerySearch(topicValue, page);
+          if (data.results.length === 0) {
+            throw error;
+          }
+          if (page === 1) {
+            setTotalPages(Math.ceil(data.total_pages / limitPage));
+            setImages(data.results);
+          } else {
+            setImages([...images, ...data.results]);
+          }
+        } catch (error) {
+          setError(true);
+          loadMore && setLoadMore(false);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchData();
+    } else {
+      topicValue && setPage(1);
     }
+  }, [page]);
+
+  const handleSearch = topic => {
+    setTopic(topic);
+    setImages([]);
+    setLoadMore(false);
+    setPage(0);
   };
 
-  const handleLoadMore = async () => {
-    try {
-      setLoading(true);
-      const data = await getGallerySearch(topicValue, page + 1);
-      setImages([...images, ...data.results]);
-    } catch (error) {
-      setError(true);
-    } finally {
-      setPage(page + 1);
-      setLoading(false);
-    }
+  const handleLoadMore = () => {
+    setPage(page + 1);
   };
 
   const handleImageView = (evt, values) => {

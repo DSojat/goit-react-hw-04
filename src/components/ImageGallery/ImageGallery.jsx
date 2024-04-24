@@ -17,7 +17,6 @@ const ImageGallery = ({ items, handleClick }) => {
             <ImageCard
               onClick={handleClick}
               values={{
-                id,
                 src: small,
                 alt: alt_description,
                 regular,
