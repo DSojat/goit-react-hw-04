@@ -1,15 +1,15 @@
 import css from './ImageCard.module.css';
 
-const ImageCard = ({ onClick, src, alt, value }) => {
-  console.log(value);
+const ImageCard = ({ onClick, values }) => {
   return (
     <div className={css.imgBox}>
       <img
         className={css.img}
-        onClick={onClick}
-        src={src}
-        alt={alt}
-        value={value}
+        onClick={evt => {
+          onClick(evt, values);
+        }}
+        src={values.src}
+        alt={values.alt}
       />
     </div>
   );

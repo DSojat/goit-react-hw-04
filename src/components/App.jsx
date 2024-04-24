@@ -54,21 +54,19 @@ function App() {
   const handleLoadMore = async () => {
     try {
       setLoading(true);
-      setPage(page + 1);
       const data = await getGallerySearch(topicValue, page + 1);
       setImages([...images, ...data.results]);
     } catch (error) {
       setError(true);
     } finally {
+      setPage(page + 1);
       setLoading(false);
     }
   };
 
-  const handleImageView = evt => {
+  const handleImageView = (evt, values) => {
     evt.preventDefault();
-    const strValue = evt.target.attributes.value.value;
-    const array1 = strValue.split(',@');
-    setImageValue([...array1, evt.target.alt]);
+    setImageValue(values);
     setIsOpen(true);
   };
 

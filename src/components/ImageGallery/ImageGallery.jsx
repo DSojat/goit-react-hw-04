@@ -16,9 +16,13 @@ const ImageGallery = ({ items, handleClick }) => {
           <li className={css.galleryItem} key={id}>
             <ImageCard
               onClick={handleClick}
-              src={small}
-              alt={alt_description}
-              value={[regular, `@${description}`]}
+              values={{
+                id,
+                src: small,
+                alt: alt_description,
+                regular,
+                description,
+              }}
             ></ImageCard>
             <div className={css.galleryStats}>
               <ul className={css.galleryStatsUl}>

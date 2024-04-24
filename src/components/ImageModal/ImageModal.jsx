@@ -4,9 +4,9 @@ import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
 const ImageModal = ({ modalIsOpen, setIsOpen, item }) => {
-  const src = item[0];
-  const description = item[1];
-  const alt = item[2];
+  const src = item.regular;
+  const description = item.description;
+  const alt = item.alt;
 
   const customStyles = {
     overlay: {
