@@ -8,7 +8,6 @@ import LoadMoreBtn from './LoadMoreBtn/LoadMoreBtn';
 import ImageModal from './ImageModal/ImageModal';
 
 import getGallerySearch from '../unsplash-api';
-import { limitPage } from '../unsplash-api';
 
 function App() {
   const [images, setImages] = useState([]);
@@ -45,7 +44,7 @@ function App() {
             throw new Error('No results found');
           }
           if (page === 1) {
-            setTotalPages(Math.ceil(data.total_pages / limitPage));
+            setTotalPages(data.total_pages);
             setImages(data.results);
           } else {
             setImages([...images, ...data.results]);

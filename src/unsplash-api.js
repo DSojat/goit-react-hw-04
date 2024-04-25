@@ -2,7 +2,7 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://api.unsplash.com/search/photos';
 
-export const limitPage = 16;
+const limitPage = 16;
 
 export default async function getGallerySearch(searchImageName, page) {
   const searchParams = new URLSearchParams({
