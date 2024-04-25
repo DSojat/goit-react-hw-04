@@ -14,7 +14,7 @@ function App() {
   const [images, setImages] = useState([]);
   const [topicValue, setTopic] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState([false, undefined]);
   const [loadMore, setLoadMore] = useState(false);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -42,7 +42,7 @@ function App() {
           setLoading(true);
           const data = await getGallerySearch(topicValue, page);
           if (data.results.length === 0) {
-            throw error;
+            throw new Error('No results found');
           }
           if (page === 1) {
             setTotalPages(Math.ceil(data.total_pages / limitPage));
@@ -51,7 +51,7 @@ function App() {
             setImages([...images, ...data.results]);
           }
         } catch (error) {
-          setError(true);
+          setError([true, error.message]);
           loadMore && setLoadMore(false);
         } finally {
           setLoading(false);
@@ -88,7 +88,7 @@ function App() {
           <ImageGallery items={images} handleClick={handleImageView} />
         )}
         {loading && <Loader></Loader>}
-        {error && <ErrorMessage></ErrorMessage>}
+        {error[0] && <ErrorMessage value={error}></ErrorMessage>}
         {loadMore > loading && (
           <LoadMoreBtn onClick={handleLoadMore}>
             <span>
