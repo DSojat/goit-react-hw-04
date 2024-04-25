@@ -62,6 +62,7 @@ function App() {
   const handleSearch = topic => {
     setTopic(topic);
     setImages([]);
+    setError([false, undefined]);
     setLoadMore(false);
     setPage(1);
   };
