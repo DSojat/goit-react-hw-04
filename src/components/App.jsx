@@ -35,38 +35,35 @@ function App() {
   }, [images]);
 
   useEffect(() => {
-    if (page > 0) {
-      const fetchData = async () => {
-        try {
-          setLoading(true);
-          const data = await getGallerySearch(topicValue, page);
-          if (data.results.length === 0) {
-            throw new Error('No results found');
-          }
-          if (page === 1) {
-            setTotalPages(data.total_pages);
-            setImages(data.results);
-          } else {
-            setImages([...images, ...data.results]);
-          }
-        } catch (error) {
-          setError([true, error.message]);
-          loadMore && setLoadMore(false);
-        } finally {
-          setLoading(false);
+    if (!topicValue) return;
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const data = await getGallerySearch(topicValue, page);
+        if (data.results.length === 0) {
+          throw new Error('No results found');
         }
-      };
-      fetchData();
-    } else {
-      topicValue && setPage(1);
-    }
-  }, [page]);
+        if (page === 1) {
+          setTotalPages(data.total_pages);
+          setImages(data.results);
+        } else {
+          setImages([...images, ...data.results]);
+        }
+      } catch (error) {
+        setError([true, error.message]);
+        loadMore && setLoadMore(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [page, topicValue]);
 
   const handleSearch = topic => {
     setTopic(topic);
     setImages([]);
     setLoadMore(false);
-    setPage(0);
+    setPage(1);
   };
 
   const handleLoadMore = () => {
